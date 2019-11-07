@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Wrong IP</title>
+	<style type="text/css">
+		@charset "UTF-8";
+/* Import Font */
+@import url("https://fonts.googleapis.com/css?family=Lato:900");
+/* Color palette */
+/* General Styles */
+body {
+  background-color: #ED5754;
+  font-family: 'Lato', sans-serif;
+}
+
+h2 {
+  color: #FFDBB2;
+  text-transform: uppercase;
+}
+
+/* Common Styles */
+.absolute-center, .container--center, .dancing-pug {
+  display: block;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.absolute-auto, ul, li {
+  display: block;
+  position: absolute;
+  margin: auto;
+}
+
+.container--center {
+  position: absolute;
+  height: 240px;
+  width: 240px;
+  text-align: center;
+}
+
+/* Pug */
+.dancing-pug {
+  height: 100px;
+  width: 100px;
+}
+.dancing-pug:before {
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  width: 100%;
+  border-radius: 40px 40px 0 0;
+  background-color: #FFD6A8;
+}
+
+ul {
+  height: 80px;
+  width: 80px;
+  padding: 0;
+  left: 10px;
+  background-color: #FFDBB2;
+  border-radius: 50px;
+  list-style: none;
+  -webkit-animation: pugdancing 1s ease-in-out infinite;
+          animation: pugdancing 1s ease-in-out infinite;
+}
+ul:after {
+  display: block;
+  content: '•	';
+  color: #4F200A;
+  position: absolute;
+  z-index: 2;
+  margin: auto;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #794932;
+}
+
+.ear {
+  width: 0;
+  z-index: 3;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 20px 16px;
+}
+
+li:nth-child(1) {
+  border-top-color: #794932;
+  top: 6px;
+  left: -14px;
+}
+
+li:nth-child(2) {
+  border-top-color: #794932;
+  top: 6px;
+  right: -14px;
+}
+
+.eye {
+  background-color: #4F200A;
+  height: 18px;
+  width: 18px;
+  z-index: 3;
+  border-radius: 9px;
+}
+
+li:nth-child(3) {
+  left: 4px;
+  top: 30px;
+}
+
+li:nth-child(4) {
+  right: 4px;
+  top: 30px;
+}
+
+li:nth-child(5) {
+  height: 20px;
+  width: 20px;
+  background-color: #ED5754;
+  border-radius: 0 0 10px 10px;
+  z-index: 5;
+  bottom: 4px;
+  left: 50%;
+  margin-left: -10px;
+}
+
+/* Pug animation */
+@-webkit-keyframes pugdancing {
+  0% {
+    left: 5px;
+    top: 0;
+  }
+  25% {
+    left: 10px;
+    top: 10px;
+  }
+  50% {
+    left: 15px;
+    top: 0px;
+  }
+  75% {
+    left: 10px;
+    top: 10px;
+  }
+  100% {
+    left: 5px;
+    top: 0px;
+  }
+}
+@keyframes pugdancing {
+  0% {
+    left: 5px;
+    top: 0;
+  }
+  25% {
+    left: 10px;
+    top: 10px;
+  }
+  50% {
+    left: 15px;
+    top: 0px;
+  }
+  75% {
+    left: 10px;
+    top: 10px;
+  }
+  100% {
+    left: 5px;
+    top: 0px;
+  }
+}
+	</style>
+</head>
+<body>
+<div class="container--center">
+  <h2>Dab on the hater bro</h2>
+  <div class="dancing-pug">
+    <ul>
+      <li class="ear"></li>
+      <li class="ear"></li>
+      <li class="eye"></li>
+      <li class="eye"></li>
+      <li></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex, nofollow, noodp, noydir">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <title>Connexion - Wifi</title>
+    <script src="/js/TranslateOpnsense.js"></script>
+    <script src="/js/Jquery3.4.1min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script src="/js/zone.js"></script>
+
+     </head>
+
+     <body>
+        <section>
+            <div class='pricing pricing-palden'>
+                <div class='selectlangue'>
+                    <a href="#" onclick="ChangeLanguage('English')" class="action-button shadow animate blue"><img src="/image/English-flag.png" class="licon"></a>
+                    <a href="#" onclick="ChangeLanguage('French')" class="action-button shadow animate yellow"><img src="/image/french-flag.png" class="licon"></a>
+                    <a href="#" onclick="ChangeLanguage('Spanish')" class="action-button shadow animate red"><img src="/image/spain-flag.png" class="licon"></a>
+                </div>
+            </div>
+            <div class='pricing pricing-palden'>
+                <div class='pricing-item'>
+                    <div class='pricing-deco' style='padding: 4em 0 3em;'>
+                        <svg class='pricing-deco-img' style="height: 75px;" enable-background='new 0 0 300 50' height='50px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 50' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
+                            <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729&#x000A; c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
+                            <path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729&#x000A;    c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z' fill='#FFFFFF' opacity='0.6'></path>
+                            <path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716&#x000A;    H42.401L43.415,98.342z' fill='#FFFFFF' opacity='0.7'></path>
+                            <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428&#x000A; c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
+                        </svg>
+                        <div id="Merci" class='pricing-price'>WiFi</div>
+                    <h3 id="TextBelowWifi" class='pricing-title'>Entrez vos identifiants pour vous connecter</h3>
+                    </div>
+                    <div class="hidden"  id="alertMSG" >
+                        <span id="Error" class="hidden"></span>
+                     <span style="color: red;" id="errorMSGtext" ></span>
+                     </div>
+                    <form>
+                        <div class="InputIdEtPassword">
+                            <span id="ID">Code à 4 caractères</span>
+                        <input type="text" id="inputUsername" class="IdMdpInput" required="required"/>
+                        <span id="MotDePasse">Mot de passe</span>
+                        <input type="password" id="inputPassword" class="IdMdpInput"required="required" />
+                        </div>
+                           <div style="margin-top: 1em">
+                            <button id="signin" class='pricing-action' >Go !</button>
+                        </div>
+                    </form>
+                    <div class="wrapper">
+                                    <a href="https://houston.wifi.example.com/" class="Acheter">
+                                        <span id="Acheter" >Acheter 🛒</span>
+                                    </a>
+                                    <a href="http://problemos.com/"><span id="Problème" class="Problème" >Probleme ⚠️</span>
+                                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+</body>
+   <script>
+      function getURLparams()
+      {
+       var vars = [], hash;
+       var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+       for(var i = 0; i < hashes.length; i++)
+       {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+$( document ).ready(function() {
+                /**
+                 * logon action
+                 */
+                 $("#signin").click(function (event) {
+                    event.preventDefault();
+                    // hide alerts
+                    $("#alertMSG").addClass("hidden");
+                    // try to login
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/captiveportal/access/logon/" + zoneid + "/",
+                        dataType:"json",
+                        data:{ user: $("#inputUsername").val(), password: $("#inputPassword").val() }
+                    }).done(function(data) {
+                        // redirect on successful login
+                        if (data['clientState'] == 'AUTHORIZED') {
+                            if (getURLparams()['redirurl'] != undefined) {
+                                window.location = getURLparams()['redirurl'];
+                            } else {
+                                // no target, reload page
+                                window.location = 'https://www.google.fr';
+                            }
+                        } else {
+                            $("#inputUsername").val("");
+                            $("#inputPassword").val("");
+                            $("#errorMSGtext").html("Mot de passe / ID incorrecte");
+                            $("#Error").html("FailLogin");
+                            $("#alertMSG").removeClass("hidden");
+                        }
+                    }).fail(function(){
+                        $("#errorMSGtext").html("Il y a un problème de communication êtes vous bien connecté en wifi ?");
+                        $("#Error").html("PasDeContact");
+                        $("#alertMSG").removeClass("hidden");
+                    });
+                });
+                /**
+                 * execute after pageload
+                 */
+                 $.ajax({
+                    type: "POST",
+                    url: "/api/captiveportal/access/status/" + zoneid + "/",
+                    dataType:"json",
+                    data:{ user: $("#inputUsername").val(), password: $("#inputPassword").val() }
+                 }).done(function(data) {
+                    if (data['authType'] == 'none') {
+                        $("#login_none").removeClass('hidden');
+                    } else {
+                        $("#login_password").removeClass('hidden');
+                    }
+                 }).fail(function(){
+                    $("#errorMSGtext").html("Il y a un problème de communication êtes vous bien connecté en wifi ?");
+                    $("#Error").html("PasDeContact");
+                    $("#alertMSG").removeClass("hidden");
+                 });
+             });
+         </script>
+</html>

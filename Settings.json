@@ -1,0 +1,23 @@
+{
+    "Location": ["houston"],
+    "ServerURL": "http://{Location}.wifi.example.com",
+    "StripeKey": {
+        "Public": "pk_test_ABCabcAdfgdfgdfgdxbvdshv",
+        "Private": "sk_test_ABCabcABCabcbadbaxbvdshv"
+    },
+    "StripeSuccessPage": "http://127.0.0.1:5000/Success?session_id={CHECKOUT_SESSION_ID}",
+    "StripeCancelPage": "http://127.0.0.1:5000/",
+    "StripeCheckoutID": {
+        "Week": "sku_FuanUXnYNE8nH8",
+        "Month": "plan_Fv1W36peMAhWK2"
+    },
+    "MailConfig": {
+      "Server": "smtp.gmail.com",
+      "Port": "465",
+      "SSL": "True",
+      "UserName": "houston.wifi@gmail.com",
+      "Password": "dsfsdfsdfdsf",
+      "SendMailAs": "houston.wifi@gmail.com",
+      "Admin": "bigboss@gmail.com"
+    }
+}
