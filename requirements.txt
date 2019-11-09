@@ -1,0 +1,4 @@
+Flask
+OpenPyxl
+Flask-Mail
+Stripe
